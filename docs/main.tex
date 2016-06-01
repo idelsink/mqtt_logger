@@ -1,0 +1,108 @@
+%\listfiles % List packages used in log file
+
+\PassOptionsToPackage{
+    style=apa,
+    backend=biber
+}{biblatex} % APA style bibliography support
+
+\PassOptionsToPackage{
+    a4paper,            % Set to a4 paper
+    left    = 2.5cm,    % Left paper margin
+    right   = 2.5cm,    % Right paper margin
+    top     = 2.5cm,    % Top paper margin
+    bottom  = 2.5cm     % Bottom paper margin
+}{geometry}
+
+\documentclass[11pt]{latex_templates/report/derptex} % load custom template
+\usepackage[english]{babel} % language selection
+\DeclareLanguageMapping{english}{english-apa}    % Language mapping
+\addbibresource[datatype=bibtex]{references.bib} % Use a bibtex bibliography file (if changed, change in Makefile)
+\graphicspath{
+    {../misc/logo/}
+} % Graphics path(s)
+%\usepackage{lipsum} % For sample text
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Setup main document parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main title
+\title {MQTT Logger}
+% Sub title
+\subtitle {}
+% Institution
+\institution {HAN University of Applied Sciences}
+% Sub department
+\subdepartment {Embedded Systems Engineering}
+% Author(s)
+\author{
+    Ingmar Delsink
+}
+% Publish data
+\date{June 2016}
+% Version number
+\version{0.1}
+% set the build folder (specified in makefile)
+\buildfolder{build}
+
+% Fonts (according to fontspec rules)
+\headfontlocation{ % header font
+    Path = {latex_templates/fonts/nimbus-sans-l/} ,
+    Extension = .ttf ,
+    UprightFont = nimbus-sans-l_regular ,
+    ItalicFont = nimbus-sans-l_italic ,
+    BoldFont = nimbus-sans-l_bold ,
+    BoldItalicFont = nimbus-sans-l_bold-italic,
+    Ligatures = {   % Set Ligature options
+       NoCommon,
+       NoRequired,
+       NoContextual,
+       NoHistoric,
+       NoDiscretionary,
+       TeX
+    }
+}
+\headfontname{nimbus-sans-l}
+
+\bodyfontlocation{ % body font
+    Path = {latex_templates/fonts/liberation_sans/} ,
+    Extension = .ttf ,
+    UprightFont =LiberationSans-Regular ,
+    ItalicFont = LiberationSans-Italic ,
+    BoldFont = LiberationSans-Bold ,
+    BoldItalicFont = LiberationSans-BoldItalic,
+    Ligatures = {   % Set Ligature options
+       NoCommon,
+       NoRequired,
+       NoContextual,
+       NoHistoric,
+       NoDiscretionary,
+       TeX
+    }
+}
+\bodyfontname{nimbus-sans-l}
+
+\loadfonts % load the fonts
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    Start document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+    \input{./chapters/titlepage}                % Include the title page
+    \inputmarkdown{chapters}{summary}{unlisted} % Summary (unlisted)
+
+    \toctitle{Table of Contents}                % ToC title
+    \printtableofcontents                       % Generate and include a table of contents
+
+    \inputmarkdown{chapters}{introduction}      % Introduction
+
+    \inputmarkdown{chapters}{database}          % Database
+
+    \inputmarkdown{chapters}{conclusion}        % Conclusion
+
+    \printlistoftables                          % Generate and include a LoT
+
+    \printlistoffigures                         % Generate and include a LoF
+
+    \printbibliography[heading=bibintoc]        % Generate and include bibliography if needed
+    %\thispagestyle{empty}                       % Disable header and footer on bibliography
+\end{document}
