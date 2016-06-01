@@ -1,0 +1,3 @@
+[submodule "docs/latex_templates"]
+	path = docs/latex_templates
+	url = https://github.com/MrCrazyID/latex_templates.git
