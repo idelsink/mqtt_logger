@@ -13,7 +13,7 @@ before_install:
     - git submodule update --init --recursive
 
 install:
-    - sudo ./docs/latex_templates/report/install_latex.sh YES
+    - sudo ./docs/latex_templates/install_latex.sh YES
 
 script:
     - cd docs && make
