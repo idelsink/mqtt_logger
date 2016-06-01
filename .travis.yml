@@ -1,0 +1,22 @@
+# Ubuntu Trusty support
+dist: trusty
+
+os:
+    - linux
+
+notifications:
+    email:
+        on_success: never
+        on_failure: always
+
+before_install:
+    - git submodule update --init --recursive
+
+install:
+    - sudo ./install_latex.sh YES
+
+env:
+    - TEST_DIR=docs
+
+script:
+    - cd $TEST_DIR && make
