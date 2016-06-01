@@ -13,10 +13,7 @@ before_install:
     - git submodule update --init --recursive
 
 install:
-    - sudo ./install_latex.sh YES
-
-env:
-    - TEST_DIR=docs
+    - sudo ./docs/latex_templates/report/install_latex.sh YES
 
 script:
-    - cd $TEST_DIR && make
+    - cd docs && make
