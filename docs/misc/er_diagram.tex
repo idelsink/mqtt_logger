@@ -1,0 +1,21 @@
+% styling
+\tikzstyle{every entity} = [top color=white, bottom color=blue!30, draw=blue!50!black!100, drop shadow]
+\tikzstyle{every weak entity} = [drop shadow={shadow xshift=.7ex, shadow yshift=-.7ex}]
+\tikzstyle{every attribute} = [top color=white, bottom color=yellow!20, draw=yellow, node distance=1cm, drop shadow]
+\tikzstyle{every relationship} = [top color=white, bottom color=red!20, draw=red!50!black!100, drop shadow]
+\tikzstyle{every isa} = [top color=white, bottom color=green!20, draw=green!50!black!100, drop shadow]
+
+\begin{tikzpicture}[node distance=1.5cm, every edge/.style={link}]
+    \node[entity] (message) {Message};
+        \node[attribute] (mid) [below left=of message] {\key{ID}} edge (message);
+        \node[attribute] (mtime) [below right=of message] {Timestamp} edge (message);
+
+    \node[relationship] (has) [below=of message] {Has}
+        edge node[auto,swap] {1} (message);
+
+    \node[entity] (payload) [below left=of has] {Payload} edge node[auto,swap] {1} (has);
+        \node[attribute] (pload) [above left=of payload] {\key{Payload}} edge (payload);
+
+    \node[entity] (topic) [below right=of has] {Topic} edge node[auto,swap] {1} (has);
+        \node[attribute] (tpic) [above right=of topic] {\key{Topic}} edge (topic);
+\end{tikzpicture}
