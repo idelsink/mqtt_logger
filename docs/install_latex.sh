@@ -30,12 +30,12 @@ fi
 if [[ ! -z $DNF_CMD ]]; then
     echo "Installing with DNF"
     sudo dnf check-update
-    ${DIR}/latex_templates/install_latex.sh ${YES} # install latex deps from template
+    ${DIR}/latex_templates/install_latex.sh $1 # install latex deps from template
     sudo dnf install ${DNF_PACKAGE_NAMES[@]} ${YES}
 elif [[ ! -z $APT_GET_CMD ]]; then
     echo "Installing with APT"
     sudo apt-get update
-    ${DIR}/latex_templates/install_latex.sh ${YES} # install latex deps from template
+    ${DIR}/latex_templates/install_latex.sh $1 # install latex deps from template
     sudo apt-get install ${DEB_PACKAGE_NAMES[@]} ${YES} --no-install-recommends # No recommended docs of 500+ MB!
 else
     echo "package manager not supported"
