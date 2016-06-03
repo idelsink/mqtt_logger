@@ -16,10 +16,12 @@ APT_GET_CMD=$(which apt-get)
 # DNF
 DNF_PACKAGE_NAMES=(
     texlive-ulem
+    texlive-pgf
 )
 # apt-get
 DEB_PACKAGE_NAMES=(
     texlive-generic-recommended
+    pgf
 )
 
 # YES check
