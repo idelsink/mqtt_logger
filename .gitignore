@@ -27,6 +27,10 @@
 *.out
 *.app
 
+# Database
+*.db3
+
 ### output folders ###
 # Build
 */build/*
+*build/*
