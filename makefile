@@ -14,6 +14,7 @@ MKDIR_P = mkdir -p
 # MQTT Logger
 mqtt_logger_out=mqtt_logger
 mqtt_logger_src=./mqtt_logger/main.cpp \
+				./mqtt_logger/mqtt_logger.cpp \
 				./mqtt_logger/logger.cpp \
 				./mqtt_logger/SQLiteCpp/src/*
 $(mqtt_logger_out): $(mqtt_logger_src)

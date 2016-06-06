@@ -59,7 +59,7 @@ void logger::init_database () {
         std::cout << "exception: " << e.what () << std::endl;
     }
 }
-int logger::add_topic (std::string topic) {
+int logger::add_topic (std::string &topic) {
     // check if exists
     try {
         SQLite::Statement query (
@@ -74,17 +74,17 @@ int logger::add_topic (std::string topic) {
         // Begin transaction
         SQLite::Transaction transaction (database);
         int nb = database.exec ("INSERT INTO topic VALUES (NULL, \"" + topic + "\")");
-        std::cout
+        /*std::cout
         << "INSERT INTO topic VALUES (NULL, \"" + topic + "\")\", returned "
         << nb << std::endl;
-        // Commit transaction
+        // Commit transaction*/
         transaction.commit ();
     } catch (std::exception& e) {
         std::cout << "exception: " << e.what () << std::endl;
     }
     return database.getLastInsertRowid ();
 }
-int logger::add_payload (std::string payload) {
+int logger::add_payload (std::string &payload) {
     // check if exists
     try {
         SQLite::Statement query (
@@ -99,9 +99,9 @@ int logger::add_payload (std::string payload) {
         // Begin transaction
         SQLite::Transaction transaction (database);
         int nb = database.exec ("INSERT INTO payload VALUES (NULL, \"" + payload + "\")");
-        std::cout
+        /*std::cout
         << "INSERT INTO payload VALUES (NULL, \"" + payload + "\")\", returned "
-        << nb << std::endl;
+        << nb << std::endl;*/
         // Commit transaction
         transaction.commit ();
     } catch (std::exception& e) {
@@ -109,7 +109,7 @@ int logger::add_payload (std::string payload) {
     }
     return database.getLastInsertRowid ();
 }
-int logger::add_message (std::string topic, std::string payload) {
+int logger::add_message (std::string &topic, std::string &payload) {
     int topic_id = add_topic (topic);
     int payload_id = add_payload (payload);
     try {

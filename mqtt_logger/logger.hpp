@@ -10,7 +10,7 @@ class logger {
     public:
     logger ();
     ~logger ();
-    int add_message(std::string topic, std::string payload);
+    int add_message(std::string &topic, std::string &payload);
 
     private:
     static const std::string database_name;
@@ -19,8 +19,8 @@ class logger {
     };
     SQLite::Database database;
     void init_database ();
-    int add_topic(std::string topic);
-    int add_payload(std::string payload);
+    int add_topic(std::string &topic);
+    int add_payload(std::string &payload);
 };
 
 #endif // logger_HPP
