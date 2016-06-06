@@ -10,15 +10,17 @@ class logger {
     public:
     logger ();
     ~logger ();
+    int add_message(std::string topic, std::string payload);
 
     private:
-    // static const std::string database_name = "data.db3";
     static const std::string database_name;
     struct sqlite_deleter {
         void operator()(sqlite3* p);
     };
     SQLite::Database database;
     void init_database ();
+    int add_topic(std::string topic);
+    int add_payload(std::string payload);
 };
 
 #endif // logger_HPP
