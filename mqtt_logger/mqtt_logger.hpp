@@ -31,10 +31,13 @@ class mqtt_logger : public mosqpp::mosquittopp {
     mqtt_logger (const mqtt_logger& other) = delete;
     mqtt_logger& operator= (const mqtt_logger& other) = delete;
     virtual ~mqtt_logger ();
+    int get_message_count(std::string tablename){
+        return _logger.get_message_count(tablename);
+    }
 
     protected:
     std::mutex _mtx;
-    logger logger_;
+    logger _logger;
 
     virtual void on_connect (int rc) override;
     virtual void on_disconnect (int rc) override;

@@ -3,6 +3,7 @@
 #include <signal.h>
 #include <sys/stat.h>
 
+#include "logger.hpp"
 #include "mqtt_logger.hpp"
 
 // declarations
@@ -27,13 +28,13 @@ int main () {
 
     // run logger
     try {
-        mqtt_logger logger;
+        mqtt_logger MQTT_logger;
         while (!receivedSIGINT) {
 
-            int rc = logger.loop ();
+            int rc = MQTT_logger.loop ();
             if (rc) {
                 std::cout << "MQTT: attempting reconnect"<< std::endl;
-                logger.reconnect ();
+                MQTT_logger.reconnect ();
             }
         }
         std::cout << "Revieced signal for signalhandler" << std::endl;

@@ -1,9 +1,10 @@
 #include "mqtt_logger.hpp"
+#include "logger.hpp"
 #include <algorithm>
 mqtt_logger::mqtt_logger ()
 : mosqpp::mosquittopp{ "THIS_IS_THE_NSA" }
 , _mtx{}
-, logger_ () {
+, _logger () {
     connect ("test.mosquitto.org", 1883, MQTT_KEEP_ALIVE);
 }
 
@@ -36,7 +37,7 @@ void mqtt_logger::on_message (const mosquitto_message* message) {
     // std::cout << "MQTT "
     //          << "topic=" << topic << ", payload=" << payload << std::endl;
 
-    logger_.add_message (topic, payload);
+    _logger.add_message (topic, payload);
 }
 
 void mqtt_logger::on_subscribe (int mid, int qos_count, const int* granted_qos) {

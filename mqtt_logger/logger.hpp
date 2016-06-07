@@ -11,7 +11,7 @@ class logger {
     logger ();
     ~logger ();
     int add_message(std::string &topic, std::string &payload);
-
+    int get_message_count(std::string tablename);
     private:
     static const std::string database_name;
     struct sqlite_deleter {
