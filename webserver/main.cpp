@@ -97,13 +97,6 @@ int main (int argc, char const* argv[]) {
     std::cout << " MQTT Logger stopped" << std::endl;
     mosqpp::lib_cleanup ();
     return 0;
-    /*while (1) {
-#ifdef WIN32
-        Sleep (10000);
-#else
-        sleep (10);
-#endif
-    }*/
 }
 // signal handlers
 void handle_sigint (int) {
