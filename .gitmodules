@@ -4,3 +4,6 @@
 [submodule "mqtt_logger/SQLiteCpp"]
 	path = mqtt_logger/SQLiteCpp
 	url = https://github.com/SRombauts/SQLiteCpp
+[submodule "webserver/mongoose-cpp"]
+	path = webserver/mongoose-cpp
+	url = https://github.com/Gregwar/mongoose-cpp
