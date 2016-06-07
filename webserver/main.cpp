@@ -31,14 +31,18 @@ class MyController : public WebController {
     void get_data (Request& request, StreamResponse& response) {
         string data_request = request.get ("table", "message");
         response
-        << "{\"nr_of_messages\": "
+        << "{\"table\": \"" << data_request << "\",\"nr_of_messages\": "
         << htmlEntities (to_string (_logger.get_message_count (data_request)))
         << "}" << endl;
+    }
+    void get_current_topic (Request& request, StreamResponse& response) {
+        response << "{\"current_topic\": \"" << _logger.get_topic () << "\"}" << endl;
     }
 
     void setup () {
         addRoute ("GET", "/hello", MyController, hello);
         addRoute ("GET", "/nr_of_messages", MyController, get_data);
+        addRoute ("GET", "/current_topic", MyController, get_current_topic);
     }
 
     private:
@@ -46,8 +50,14 @@ class MyController : public WebController {
 };
 
 
-int main () {
-    mqtt_logger MQTT_logger;
+int main (int argc, char const* argv[]) {
+    // if no configuration was given, exit
+    if (argc != 2) {
+        std::cout << "usage: " << argv[0] << " topic name" << std::endl;
+        ;
+        exit (EXIT_FAILURE);
+    }
+    mqtt_logger MQTT_logger (argv[1]);
     // set signal handlers
     signal (SIGINT, handle_sigint);
     MyController myController (MQTT_logger);

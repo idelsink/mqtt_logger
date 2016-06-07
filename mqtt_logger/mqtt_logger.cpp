@@ -1,9 +1,10 @@
 #include "mqtt_logger.hpp"
 #include "logger.hpp"
 #include <algorithm>
-mqtt_logger::mqtt_logger ()
+mqtt_logger::mqtt_logger (std::string topic)
 : mosqpp::mosquittopp{ "THIS_IS_THE_NSA" }
 , _mtx{}
+, _topic (topic)
 , _logger () {
     connect ("test.mosquitto.org", 1883, MQTT_KEEP_ALIVE);
 }
@@ -15,7 +16,7 @@ mqtt_logger::~mqtt_logger () {
 void mqtt_logger::on_connect (int rc) {
     std::cout << "MQTT:\tconnected with broker, rc=" << rc << std::endl;
     if (rc == 0) {
-        subscribe (nullptr, "#", MQTT_QoS_0);
+        subscribe (nullptr, _topic.c_str(), MQTT_QoS_0);
     }
 }
 
