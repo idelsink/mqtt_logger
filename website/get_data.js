@@ -1,9 +1,9 @@
-var update_time = 200;//ms
+var update_time = 300;//ms
 
 $.ajaxSetup ({
     // Disable caching of AJAX responses */
     cache: false,
-    timeout: update_time*10
+    timeout: update_time*50
 });
 
 function set_message_counts(table) {

@@ -80,6 +80,7 @@ int main (int argc, char const* argv[]) {
     try {
 
         while (!receivedSIGINT) {
+            usleep(1000); // small dalay
 
             int rc = MQTT_logger.loop ();
             if (rc) {
