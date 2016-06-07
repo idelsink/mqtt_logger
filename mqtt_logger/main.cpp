@@ -3,7 +3,7 @@
 #include <signal.h>
 #include <sys/stat.h>
 
-#include "logger.hpp"
+#include "mqtt_logger.hpp"
 
 // declarations
 volatile bool receivedSIGINT{ false };
@@ -27,14 +27,14 @@ int main () {
 
     // run logger
     try {
-        logger mqtt_logger;
+        mqtt_logger logger;
         while (!receivedSIGINT) {
 
-            // int rc = client.loop ();
-            // if (rc) {
-            //    LOG (ERROR) << "MQTT: attempting reconnect";
-            //    client.reconnect ();
-            //}
+            int rc = logger.loop ();
+            if (rc) {
+                std::cout << "MQTT: attempting reconnect"<< std::endl;
+                logger.reconnect ();
+            }
         }
         std::cout << "Revieced signal for signalhandler" << std::endl;
     } catch (std::exception& e) {
