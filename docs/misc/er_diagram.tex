@@ -14,8 +14,10 @@
         edge node[auto,swap] {1} (message);
 
     \node[entity] (payload) [below left=of has] {Payload} edge node[auto,swap] {1} (has);
-        \node[attribute] (pload) [above left=of payload] {\key{Payload}} edge (payload);
+        \node[attribute] (ploadid) [above=of payload] {\key{ID}} edge (payload);
+        \node[attribute] (pload) [above left=of payload] {Payload} edge (payload);
 
     \node[entity] (topic) [below right=of has] {Topic} edge node[auto,swap] {1} (has);
-        \node[attribute] (tpic) [above right=of topic] {\key{Topic}} edge (topic);
+        \node[attribute] (tpicid) [above=of topic] {\key{ID}} edge (topic);
+        \node[attribute] (tpic) [above right=of topic] {Topic} edge (topic);
 \end{tikzpicture}
