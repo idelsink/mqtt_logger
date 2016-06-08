@@ -14,6 +14,8 @@ before_install:
 
 install:
     - sudo ./docs/install_latex.sh YES
+    - sudo apt-get install -y libsqlite3-dev
 
 script:
     - cd docs && make
+    - make all
