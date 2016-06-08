@@ -18,4 +18,4 @@ install:
 
 script:
     - cd docs && make
-    - make all
+    - cd .. && make all
