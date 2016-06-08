@@ -11,6 +11,14 @@ notifications:
 
 before_install:
     - git submodule update --init --recursive
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq libsfml-dev
+    - git clone https://github.com/eclipse/mosquitto.git
+    - cd mosquitto
+    - cmake .
+    - make
+    - sudo make -i install #mosquitto is does not install without errors...
+    - cd ..
 
 install:
     - sudo ./docs/install_latex.sh YES
