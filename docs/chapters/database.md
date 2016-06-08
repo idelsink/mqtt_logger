@@ -2,6 +2,9 @@
 
 ER-diagram of the database.
 
+This setup was chosen so that in the future more information can be logged
+without to much effort.
+
 \usetikzlibrary{positioning}
 \usetikzlibrary{shadows}
 \begin{figure}[H]
