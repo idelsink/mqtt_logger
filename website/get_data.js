@@ -1,4 +1,4 @@
-var update_time = 300;//ms
+var update_time = 100;//ms
 
 $.ajaxSetup ({
     // Disable caching of AJAX responses */
@@ -6,13 +6,15 @@ $.ajaxSetup ({
     timeout: update_time*50
 });
 
-function set_message_counts(table) {
-    $("#"+table.table+"_table_count").text(table.nr_of_messages);
+function set_table_counts(counts) {
+    $("#message_table_count").text(counts.nr_of_messages.message);
+    $("#topic_table_count").text(counts.nr_of_messages.topic);
+    $("#payload_table_count").text(counts.nr_of_messages.payload);
 };
 
-function get_message_count(table) {
-    $.getJSON('nr_of_messages', {table: table}, function(server) {
-        set_message_counts(server);
+function get_table_counts() {
+    $.getJSON('nr_of_messages', {}, function(server) {
+        set_table_counts(server);
     });
 };
 
@@ -28,9 +30,7 @@ function get_current_topic(table) {
 };
 
 setInterval(function(){
-    get_message_count("message");
-    get_message_count("topic");
-    get_message_count("payload");
+    get_table_counts();
     get_current_topic();
 }, update_time);
 

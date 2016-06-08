@@ -3,12 +3,12 @@
 #else
 #include <unistd.h>
 #endif
-#include <stdlib.h>
-#include <signal.h>
-#include <mongoose/Server.h>
-#include <mongoose/WebController.h>
 #include "../mqtt_logger/logger.hpp"
 #include "../mqtt_logger/mqtt_logger.hpp"
+#include <mongoose/Server.h>
+#include <mongoose/WebController.h>
+#include <signal.h>
+#include <stdlib.h>
 
 // declarations
 volatile bool receivedSIGINT{ false };
@@ -35,13 +35,23 @@ class MyController : public WebController {
         << htmlEntities (to_string (_logger.get_message_count (data_request)))
         << "}" << endl;
     }
+    void get_table_count (Request& request, StreamResponse& response) {
+        response
+        << "{"
+        << "\"nr_of_messages\": {"
+        << "\"message\": " << to_string (_logger.get_message_count ("message")) << ","
+        << "\"topic\": " << to_string (_logger.get_message_count ("topic")) << ","
+        << "\"payload\": " << to_string (_logger.get_message_count ("payload")) << ""
+        << "}"
+        << "}" << endl;
+    }
     void get_current_topic (Request& request, StreamResponse& response) {
         response << "{\"current_topic\": \"" << _logger.get_topic () << "\"}" << endl;
     }
 
     void setup () {
         addRoute ("GET", "/hello", MyController, hello);
-        addRoute ("GET", "/nr_of_messages", MyController, get_data);
+        addRoute ("GET", "/nr_of_messages", MyController, get_table_count);
         addRoute ("GET", "/current_topic", MyController, get_current_topic);
     }
 
@@ -80,7 +90,7 @@ int main (int argc, char const* argv[]) {
     try {
 
         while (!receivedSIGINT) {
-            usleep(1000); // small dalay
+            usleep (1000); // small dalay
 
             int rc = MQTT_logger.loop ();
             if (rc) {
