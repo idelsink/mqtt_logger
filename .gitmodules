@@ -1,6 +1,6 @@
 [submodule "docs/latex_templates"]
 	path = docs/latex_templates
-	url = https://github.com/MrCrazyID/latex_templates.git
+	url = https://github.com/idelsink/latex_templates.git
 [submodule "mqtt_logger/SQLiteCpp"]
 	path = mqtt_logger/SQLiteCpp
 	url = https://github.com/SRombauts/SQLiteCpp
